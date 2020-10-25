@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime,date
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -61,7 +61,23 @@ class Profile(models.Model):
     nivel = models.ForeignKey(Level, on_delete=models.RESTRICT, null=True )
     sentimental = models.ForeignKey(Sentimental, on_delete=models.RESTRICT, null=True )
 
+class Album(models.Model):
+    titulo = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=255)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.RESTRICT, null=True )
+    nivel = models.ForeignKey(Level, on_delete=models.RESTRICT, null=True )
 
+class Imagen(models.Model): 
+    titulo = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.RESTRICT, null=True )
+    nivel = models.ForeignKey(Level, on_delete=models.RESTRICT, null=True )
+    album = models.ForeignKey(Album, on_delete=models.RESTRICT, null=True )
 
-
+class Post(models.Model): 
+    titulo = models.CharField(max_length=255)
+    descripcion = models.TextField(null=True)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.RESTRICT, null=True )
+    nivel = models.ForeignKey(Level, on_delete=models.RESTRICT, null=True )
+    
 
