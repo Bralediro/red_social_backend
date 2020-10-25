@@ -1,7 +1,12 @@
 from django.db import models
-from datetime import datetime,date
 from django.contrib.auth.models import User
 # Create your models here.
+
+class AuthUser(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
 
 class Categorias(models.Model):
     #activo = models.BooleanField(default=False)
@@ -10,7 +15,7 @@ class Categorias(models.Model):
     def __str__(self):
         return self.nombre
 
-class Usuarios(models.Model):
+class Usuarios(AuthUser):
     class Meta:
         verbose_name = "Usuario"
         verbose_name_plural = "Usuarios"
@@ -46,7 +51,7 @@ class Sentimental(models.Model):
     def __str__(self):
         return self.nombre
 
-class Profile(models.Model):
+class Profile(AuthUser):
     fech_nac = models.CharField(max_length=50)
     genero = models.CharField(max_length=50)
     pais = models.ForeignKey(Paises, on_delete=models.RESTRICT, null=True )
@@ -57,7 +62,7 @@ class Profile(models.Model):
     no_megusta = models.TextField(null=True)
     direccion = models.CharField(max_length=100)
     telefono = models.CharField(max_length=25)
-    usuario = models.ForeignKey(Usuarios, on_delete=models.RESTRICT, null=True )
+    #usuario = models.ForeignKey(Usuarios, on_delete=models.RESTRICT, null=True )
     nivel = models.ForeignKey(Level, on_delete=models.RESTRICT, null=True )
     sentimental = models.ForeignKey(Sentimental, on_delete=models.RESTRICT, null=True )
 

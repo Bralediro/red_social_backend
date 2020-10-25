@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CategoriasView, UsuariosView, RecoverView, LevelView, PaisesView, SentimentalView, ProfileView
+from .views import CategoriasView, UsuariosView, RecoverView, LevelView, PaisesView, SentimentalView, ProfileView,AlbumView, ImagenView, PostView
 
 urlpatterns = [
     path('categorias/', CategoriasView.as_view({
@@ -49,6 +49,33 @@ urlpatterns = [
         'post': 'create'        
     })),
     path('profile/<int:pk>', ProfileView.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('album/', AlbumView.as_view({
+        'get': 'list',
+        'post': 'create'        
+    })),
+    path('album/<int:pk>', AlbumView.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('imagen/', ImagenView.as_view({
+        'get': 'list',
+        'post': 'create'        
+    })),
+    path('imagen/<int:pk>', ImagenView.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+    })),
+    path('post/', PostView.as_view({
+        'get': 'list',
+        'post': 'create'        
+    })),
+    path('post/<int:pk>', PostView.as_view({
         'get': 'retrieve',
         'put': 'update',
         'delete': 'destroy'
